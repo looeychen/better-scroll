@@ -123,6 +123,16 @@ export default class BScroll extends EventEmitter {
     this.applyPlugins()
   }
 
+  private setOptions(options: Options) {
+    options &&
+      Object.keys(options).forEach(key => {
+        if (this.options[key] !== undefined) {
+          this.options[key] = options[key]
+        }
+      })
+    this.scroller.setOptions(options)
+  }
+
   private applyPlugins() {
     const options = this.options
     ;(this.constructor as typeof BScroll).plugins

@@ -10,6 +10,7 @@ import {
   EventRegister,
   EventEmitter
 } from '@better-scroll/shared-utils'
+import { Options as BScrollOptions } from '../Options'
 
 type Exception = {
   tagName?: RegExp
@@ -45,6 +46,15 @@ export default class ActionsHandler {
       'click'
     ])
     this.handleDOMEvents()
+  }
+
+  public setOptions(options: BScrollOptions) {
+    options &&
+      Object.keys(options).forEach(key => {
+        if (this.options[key] !== undefined) {
+          this.options[key] = options[key]
+        }
+      })
   }
 
   private handleDOMEvents() {

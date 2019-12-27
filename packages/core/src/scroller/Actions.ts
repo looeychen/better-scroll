@@ -105,6 +105,9 @@ export default class ScrollerActions {
   }
 
   private handleStart(e: TouchEvent) {
+    if (!this.options.checkScroll()) {
+      return
+    }
     const timestamp = getNow()
     this.moved = false
 
@@ -125,6 +128,9 @@ export default class ScrollerActions {
   }
 
   private handleMove(deltaX: number, deltaY: number, e: TouchEvent) {
+    if (!this.options.checkScroll()) {
+      return
+    }
     if (this.hooks.trigger(this.hooks.eventTypes.beforeMove, e)) {
       return
     }
@@ -188,6 +194,9 @@ export default class ScrollerActions {
   }
 
   private handleEnd(e: TouchEvent) {
+    if (!this.options.checkScroll()) {
+      return
+    }
     if (this.hooks.trigger(this.hooks.eventTypes.beforeEnd, e)) {
       return
     }

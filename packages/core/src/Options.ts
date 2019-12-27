@@ -115,6 +115,10 @@ export class Options {
     this.disableMouse = hasTouch
     this.disableTouch = !hasTouch
     this.autoBlur = true
+    this.resetPositionOriginal = false
+    this.checkScroll = function() {
+      return true
+    }
   }
   merge(options?: { [key: string]: any }) {
     if (!options) return this

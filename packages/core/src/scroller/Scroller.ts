@@ -143,6 +143,16 @@ export default class Scroller {
     })
   }
 
+  public setOptions(options: BScrollOptions) {
+    options &&
+      Object.keys(options).forEach(key => {
+        if (this.options[key] !== undefined) {
+          this.options[key] = options[key]
+        }
+      })
+    this.actionsHandler.setOptions(this.options)
+  }
+
   private bindTranslater() {
     const hooks = this.translater.hooks
     hooks.on(hooks.eventTypes.beforeTranslate, (transformStyle: string[]) => {
@@ -512,13 +522,17 @@ export default class Scroller {
       position: x,
       inBoundary: xInBoundary
     } = this.scrollBehaviorX.checkInBoundary()
-    const {
+    let {
       position: y,
       inBoundary: yInBoundary
     } = this.scrollBehaviorY.checkInBoundary()
 
     if (xInBoundary && yInBoundary) {
       return false
+    }
+
+    if (this.options.resetPositionOriginal) {
+      y = 0
     }
 
     // out of boundary
