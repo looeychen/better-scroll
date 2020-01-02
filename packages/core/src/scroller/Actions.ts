@@ -105,7 +105,7 @@ export default class ScrollerActions {
   }
 
   private handleStart(e: TouchEvent) {
-    if (!this.options.checkScroll()) {
+    if (!this.options.checkScroll(e)) {
       return
     }
     const timestamp = getNow()
@@ -128,7 +128,7 @@ export default class ScrollerActions {
   }
 
   private handleMove(deltaX: number, deltaY: number, e: TouchEvent) {
-    if (!this.options.checkScroll()) {
+    if (!this.options.checkScroll(e, deltaX, deltaY)) {
       return
     }
     if (this.hooks.trigger(this.hooks.eventTypes.beforeMove, e)) {
@@ -194,7 +194,7 @@ export default class ScrollerActions {
   }
 
   private handleEnd(e: TouchEvent) {
-    if (!this.options.checkScroll()) {
+    if (!this.options.checkScroll(e)) {
       return
     }
     if (this.hooks.trigger(this.hooks.eventTypes.beforeEnd, e)) {
